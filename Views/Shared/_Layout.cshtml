@@ -18,13 +18,18 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <form class="d-flex" asp-controller="home" asp-action="GeneralSearch" method="get">
-                    <input class="form-control" type="text" placeholder="Search" name="searching" />
-                    <select class="form-control btn btn-secondary" name="searchtype">
-                        <option value="Flight">Flight</option>
-                        <option value="Booking">Booking</option>
+                
+
+                <form class="d-flex" asp-controller="Home" asp-action="GeneralSearch" method="get">
+                    <input class="form-control" type="text" placeholder="Search" name="searchString" />
+                    <select class="form-control btn btn-secondary dropdown-toggle" name="searchType">
+                        
+                        <option value="Flights">Flights</option>
+                        <option value="Rental">Rental</option>
+                        <option value="Hotel">Hotel</option>
+
                     </select>
-                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-search"></i></button>
+                    <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
 
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -39,12 +44,11 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Flight" asp-action="Index"><i class="fa-solid fa-plane"></i> Flights</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="CarRent" asp-action="Index"><i class="fa-solid fa-car"></i> Car Rents</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Rental" asp-action="Index"><i class="fa-solid fa-car"></i> Car Rents</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Hotel" asp-action="Index"><i class="fa-solid fa-bed"></i> Hotels</a>
                         </li>
-
                     </ul>
                 </div>
             </div>

@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model WebApplication2.Models.Flight
+
+
+<h2>Delete</h2>
+
+<h3>Delete this following flight?</h3>
+<div>
+    <h4>Flight</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Flight Number:</dt>
+        <dd>@Model.FlightNumber</dd>
+    </dl>
+
+    @using (Html.BeginForm("Delete", "Flight", new { id = Model.Id }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+    }
+</div>

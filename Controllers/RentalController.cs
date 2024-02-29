@@ -5,6 +5,7 @@ using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
 {
+    
     public class RentalController : Controller
     {
         private readonly AppDbContext _context;
@@ -17,7 +18,7 @@ namespace WebApplication2.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(_context.Rentals.ToList());
         }
 
         [HttpGet]
@@ -119,7 +120,7 @@ namespace WebApplication2.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Search(string modelName, string renralProvider)
+        /*public async Task<IActionResult> Search(string modelName, string renralProvider)
         {
             var rentalQuery = from p in _context.Rentals
                                select p;
@@ -145,22 +146,40 @@ namespace WebApplication2.Controllers
             var rental = await rentalQuery.ToListAsync();
             ViewData["SearchedPerformed"] = searchPerformed;
             return View("Index", rental);
+        }*/
+        public async Task<IActionResult> Search(string searchString)
+        {
+            var rentalsQuery = from r in _context.Rentals
+                                select r;
+            bool searchPerformed = !String.IsNullOrEmpty(searchString);
+            if (searchPerformed)
+            {
+                rentalsQuery = rentalsQuery.Where(r => r.ModelName.Contains(searchString)
+                                                             || r.RentalProvider.Contains(searchString));
+            }
+
+            var rentals = await rentalsQuery.ToListAsync();
+            ViewData["SearchPerformed"] = searchPerformed;
+            ViewData["SearchString"] = searchString;
+            return View("Index", rentals);
+
         }
+    
 
         public IActionResult Book(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var rental = _context.Rentals.FirstOrDefault(m => m.Id == id);
-            if (rental == null)
-            {
-                return NotFound();
-            }
+                var rental = _context.Rentals.FirstOrDefault(m => m.Id == id);
+                if (rental == null)
+                {
+                    return NotFound();
+                }
 
-            return View(rental);
+                return View(rental);
         }
 
 

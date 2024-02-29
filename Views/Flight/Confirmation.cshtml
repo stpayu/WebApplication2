@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    ViewData["Title"] = "Booking Confirmation";
+}
+
+@model WebApplication2.Models.FlightBooking
+
+<div class="container">
+    <h2>Booking Confirmation</h2>
+
+    <p>Your flight booking has been confirmed. Details:</p>
+
+    <ul>
+        <li><strong>Flight Number:</strong> @Model.FlightNumber</li>
+        <li><strong>Origin:</strong> @Model.Origin</li>
+        <li><strong>Destination:</strong> @Model.Destination</li>
+        <li><strong>Name:</strong> @Model.Name</li>
+        <li><strong>DepartureDateTime:</strong> @Model.DepartureDateTime</li>
+        <li><strong>ArrivalDateTime:</strong> @Model.ArrivalDateTime</li>
+    </ul>
+
+    <p>Thank you for choosing our services!</p>
+</div>

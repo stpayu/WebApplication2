@@ -13,7 +13,7 @@ namespace WebApplication2.Controllers
             _logger = logger;
         }
 
-        [Route("index")]
+        
         public IActionResult Index()
         {
             return View();
@@ -29,6 +29,40 @@ namespace WebApplication2.Controllers
         public IActionResult About()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult GeneralSearch(string searchType, string searchString)
+        {
+            if (searchType == "Flight")
+            {
+                return RedirectToAction("Search", "Flight", new { searchString });
+            }
+            else if (searchType == "Rental")
+            {
+                return RedirectToAction("Search", "Rental", new { searchString });
+            }
+
+            else if (searchType == "Hotel")
+            {
+                return RedirectToAction("Search", "Hotel", new { searchString });
+            }
+
+
+            return RedirectToAction("Index", "Home");
+
+        }
+
+        public IActionResult NotFound(int statusCode)
+        {
+            _logger.LogInformation("Not Found action called with status code: {StatusCode}", statusCode);
+
+            if (statusCode == 404)
+            {
+                return View("NotFound");
+            }
+
+            return View("Error");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
